@@ -34,20 +34,20 @@ def run(jobID, dataFileURL):
     print(f"File Downloaded to {input_file}")
     
     # Extracting all files if the datafile is zip.  
-    if fileName.endswith(".zip"):
-        input_file = extract_zip_file(input_file)
-    if os.path.isdir(input_file):
-        payloadforservice = "<test response goes here>"
-        print("loop through the folder and read all files")
-        #code to loop through extracted zip folder
-        for filename in os.listdist(input_file):
-            f = os.path.join(directory, filename)
-            # checking if it is a file
-            if os.path.isfile(f):
-                print(f)
-                # update payloadforservice for each iteration
-    else:
-        with open(input_file) as f: 
+    # if fileName.endswith(".zip"):
+    #     input_file = extract_zip_file(input_file)
+    # if os.path.isdir(input_file):
+    #     payloadforservice = "<test response goes here>"
+    #     print("loop through the folder and read all files")
+    #     #code to loop through extracted zip folder
+    #     for filename in os.listdist(input_file):
+    #         f = os.path.join(directory, filename)
+    #         # checking if it is a file
+    #         if os.path.isfile(f):
+    #             print(f)
+    #             # update payloadforservice for each iteration
+    # else:
+    with open(input_file) as f:
             payloadforservice = f.read()
     
     return payloadforservice
@@ -55,23 +55,23 @@ def run(jobID, dataFileURL):
 
 
 
-def extract_zip_file(zipped_file):
-    """
-    title:: 
-        extract_zip_file
-    description:: 
-        extract the files in the zip file.
-    inputs::
-        zipped_file
-             URL for the downloaded zipfile.
-    returns::
-         extracted_folder
-              extracted zip files 
-    """
-
-    extracted_folder = "/tmp/pre-process" + zipped_file.replace(".zip", "")
-    with zipfile.ZipFile(zipped_file, 'r') as zip_ref:
-        zip_ref.extractall(extracted_folder)
-    print(f"Files extracted to {extracted_folder}")
-    
-    return extracted_folder
+# def extract_zip_file(zipped_file):
+#     """
+#     title::
+#         extract_zip_file
+#     description::
+#         extract the files in the zip file.
+#     inputs::
+#         zipped_file
+#              URL for the downloaded zipfile.
+#     returns::
+#          extracted_folder
+#               extracted zip files
+#     """
+#
+#     extracted_folder = "/tmp/pre-process" + zipped_file.replace(".zip", "")
+#     with zipfile.ZipFile(zipped_file, 'r') as zip_ref:
+#         zip_ref.extractall(extracted_folder)
+#     print(f"Files extracted to {extracted_folder}")
+#
+#     return extracted_folder

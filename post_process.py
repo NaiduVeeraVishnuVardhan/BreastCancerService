@@ -55,13 +55,13 @@ def __updateJob(jobID, insightsS3Link):
     return status_map
     
     
-def zip_output_files(files_to_zip):
-
-    zip_file = "/tmp/post-process" + files_to_zip + ".zip"
-    
-    with zipfile.ZipFile(zip_file, 'w') as zipObj:
-        for folderName, subfolders, filenames in os.walk(zip_file):
-            for filename in filenames:
-                filePath = os.path.join(folderName, filename)
-                zipObj.write(filePath, basename(filePath))
-    print(f"Files zipped to : {zip_file}")
+# def zip_output_files(files_to_zip):
+#
+#     zip_file = "/tmp/post-process" + files_to_zip + ".zip"
+#
+#     with zipfile.ZipFile(zip_file, 'w') as zipObj:
+#         for folderName, subfolders, filenames in os.walk(zip_file):
+#             for filename in filenames:
+#                 filePath = os.path.join(folderName, filename)
+#                 zipObj.write(filePath, basename(filePath))
+#     print(f"Files zipped to : {zip_file}")

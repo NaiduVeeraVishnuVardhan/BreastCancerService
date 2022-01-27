@@ -25,7 +25,7 @@ def run(jobID, dataInput):
   # print (f"Attempting to predict using {ENDPOINT_NAME}")
   # response = runtime.invoke_endpoint(EndpointName=ENDPOINT_NAME,
   #                           ContentType='text/csv',
-  #                           Body= payload)
+  #                           Body= dataInput)
   # result = json.loads(response['Body'].read().decode())
   # print (f"Predictions Generated \n {result}")
   # result_array = result.items()
@@ -35,3 +35,4 @@ def run(jobID, dataInput):
   insightsDataFileLocation = f"/tmp/{jobID}-insights.csv"
   df.to_csv(insightsDataFileLocation)
   return insightsDataFileLocation
+
