@@ -9,7 +9,7 @@ def run(jobID, dataLocation):
     title:: 
         run
     description:: 
-        -	This takes insightsDataFileLocation and jobID as Input, upload the insights file to s3 and get the downloadable link for the same. 
+        -	This takes insightsDataFileLocation and jobID as Input, upload the insights file to s3 and get the downloadable link for the same.
     inputs:: 
     jobID 
        Job ID from datashop application
@@ -17,9 +17,7 @@ def run(jobID, dataLocation):
         Downloadable URL of the dataset
         
     returns:: 
-    payloadforservice
-        payload for model/service
-    
+        response from the Datashop application
     """
    insightsS3Link = aws_s3.upload_file("data-shop-backend", "insights", dataLocation)
    return __updateJob(jobID, insightsS3Link)
