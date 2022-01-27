@@ -9,7 +9,7 @@ def run(jobID, dataLocation):
     title:: 
         run
     description:: 
-        takes dataset URL and jobID as input, download the dataset and read the input
+        -	This takes insightsDataFileLocation and jobID as Input, upload the insights file to s3 and get the downloadable link for the same. 
     inputs:: 
     jobID 
        Job ID from datashop application
