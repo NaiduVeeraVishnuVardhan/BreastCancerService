@@ -28,7 +28,7 @@ def __updateJob(jobID, insightsS3Link):
     title:: 
         __updateJob
     description:: 
-        Update the dataapplication with insightsLink.
+        Update the data application with insightsLink.
     inputs:: 
     jobID 
        Job ID from datashop application.
