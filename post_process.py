@@ -9,7 +9,7 @@ def run(jobID, dataLocation):
     title:: 
         run
     description:: 
-        -	This takes insightsDataFileLocation and jobID as Input, upload the insights file to s3 and get the downloadable link for the same.
+        takes dataset URL and jobID as input, download the dataset and read the input
     inputs:: 
     jobID 
        Job ID from datashop application
@@ -17,7 +17,9 @@ def run(jobID, dataLocation):
         Downloadable URL of the dataset
         
     returns:: 
-        response from the Datashop application
+    payloadforservice
+        payload for model/service
+    
     """
    insightsS3Link = aws_s3.upload_file("data-shop-backend", "insights", dataLocation)
    return __updateJob(jobID, insightsS3Link)
@@ -28,7 +30,7 @@ def __updateJob(jobID, insightsS3Link):
     title:: 
         __updateJob
     description:: 
-        Update the data application with insightsLink.
+        Update the dataapplication with insightsLink.
     inputs:: 
     jobID 
        Job ID from datashop application.
@@ -40,7 +42,7 @@ def __updateJob(jobID, insightsS3Link):
         response from the datashop application.
     """
     status_map = {'status_code': '', 'json_response': ''}    
-    dataShopEndpointURL = "http://52.64.118.100:8000/api/job/updateJob"
+    dataShopEndpointURL = "http://13.55.64.166:8000/api/job/updateJob"
     payload = json.dumps({
                 "insightFileURL": insightsS3Link,
                 "jobid":jobID
@@ -55,13 +57,15 @@ def __updateJob(jobID, insightsS3Link):
     return status_map
     
     
-# def zip_output_files(files_to_zip):
-#
-#     zip_file = "/tmp/post-process" + files_to_zip + ".zip"
-#
-#     with zipfile.ZipFile(zip_file, 'w') as zipObj:
-#         for folderName, subfolders, filenames in os.walk(zip_file):
-#             for filename in filenames:
-#                 filePath = os.path.join(folderName, filename)
-#                 zipObj.write(filePath, basename(filePath))
-#     print(f"Files zipped to : {zip_file}")
+def zip_output_files(fileLocationToZip):
+
+    zip_file = "/tmp/post-process/" + fileLocationToZip.split("/")[-1]+ ".zip"
+    
+    with zipfile.ZipFile(zip_file, 'w') as zipObj:
+        for folderName, subfolders, filenames in os.walk(fileLocationToZip):
+            for filename in filenames:
+                filePath = os.path.join(folderName, filename)
+                zipObj.write(filePath, basename(filePath))
+                
+    print(f"Files zipped to : {zip_file}")
+

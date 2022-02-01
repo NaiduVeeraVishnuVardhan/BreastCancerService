@@ -1,6 +1,8 @@
 import boto3
 import botocore
 
+
+
 def __get_s3_client():
     """
     title:: 
@@ -41,3 +43,7 @@ def upload_file(bucket_name, key_name, file_path):
     print(f"Uploading {file_path} to {bucket_name}/{key_name}")
     response = __get_s3_client().upload_file(file_path, bucket_name, f"{key_name}/{fileName}", ExtraArgs={'ACL': 'public-read'})
     return f"https://{bucket_name}.s3.ap-southeast-2.amazonaws.com/{key_name}/{fileName}" 
+    
+    
+    
+    

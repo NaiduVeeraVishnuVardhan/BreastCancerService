@@ -3,6 +3,7 @@ import pre_process
 import post_process
 import model
 
+
 def lambda_handler(event, context):
     """
     title:: 
@@ -18,10 +19,11 @@ def lambda_handler(event, context):
     
     #Loads the body of the event.
     input_dict = json.loads(event['body'])
+    inputdata = input_dict["dataFileURL"]
     
     #running the preprocessing steps for the model. It takes dataset URL, jobID as input, download the dataset and read the input.
-    inputPayloadForService = pre_process.run(input_dict["jobID"], input_dict["dataFileURL"])
-    
+    inputPayloadForService = pre_process.run(input_dict["jobID"], inputdata["url"],inputdata["json"])
+    print("DF's in lambda",inputPayloadForService)
     #model buliding/ getting the predictions here. It takes jobID and inputPayloadForService as input, run the model and get precitions saved in the temp folder of lambda.
     insightsDataFileLocation = model.run(input_dict["jobID"],inputPayloadForService)
     
