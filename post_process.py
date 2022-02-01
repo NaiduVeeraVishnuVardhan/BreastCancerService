@@ -1,11 +1,12 @@
-import aws_s3
+
 import json
 import requests
 import zipfile
 import os
+import backend 
 
 def run(jobID, dataLocation):
-   """
+    """
     title:: 
         run
     description:: 
@@ -21,8 +22,17 @@ def run(jobID, dataLocation):
         payload for model/service
     
     """
-   insightsS3Link = aws_s3.upload_file("data-shop-backend", "insights", dataLocation)
-   return __updateJob(jobID, insightsS3Link)
+    insightsS3Link = None
+    file_name = dataLocation.split("/")[-1]
+    file_path = dataLocation.replace(file_name,"")
+    if file_name.lower().endswith(".csv"):
+        insightsS3Link = backend.upload_document(file_name, file_path)
+        #insightsS3Link = aws_s3.upload_file("data-shop-backend", "insights", dataLocation) 
+        print(insightsS3Link)
+    elif file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'))
+        insightsS3Link = backend.upload_image(file_name, file_path)
+        
+    return __updateJob(jobID, insightsS3Link)
 
 
 def __updateJob(jobID, insightsS3Link):
