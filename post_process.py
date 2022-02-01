@@ -29,7 +29,7 @@ def run(jobID, dataLocation):
         insightsS3Link = backend.upload_document(file_name, file_path)
         #insightsS3Link = aws_s3.upload_file("data-shop-backend", "insights", dataLocation) 
         print(insightsS3Link)
-    elif file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'))
+    elif file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')):
         insightsS3Link = backend.upload_image(file_name, file_path)
         
     return __updateJob(jobID, insightsS3Link)
